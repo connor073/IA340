@@ -43,3 +43,37 @@ delete from professor
 where p_email = 'p1@jmu.edu'
 
 -- Q2: Update the table first because it will show p1@jmu.edu
+
+select * from professor;
+
+-- Q2.7
+select * from enroll;
+
+-- Q2.8
+select c_number, count(*) as num_student
+from enroll
+group by c_number
+
+order by num_student desc
+limit 1;
+
+-- Q2.9
+create view p_name_c_name as
+
+select 	professor.p_name,
+	course.c_name,
+	course.room
+from professor
+
+inner join course
+on professor.p_email = course.p_email;
+
+-- Q2.10
+select 	professor.p_name,
+	count(course.c_name) as num_course
+from professor
+inner join course
+on professor.p_email = course.p_email
+group by professor.p_name
+order by num_course desc
+limit 1;
